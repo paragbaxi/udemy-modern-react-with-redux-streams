@@ -1,0 +1,29 @@
+{
+  "streams": [
+    {
+      "title": "my stream",
+      "description": "is awesome",
+      "id": 1
+    },
+    {
+      "title": "other stream",
+      "description": "here's some stream",
+      "id": 2
+    },
+    {
+      "title": "create",
+      "description": "fdas",
+      "id": 3
+    },
+    {
+      "title": "a",
+      "description": "a",
+      "id": 4
+    },
+    {
+      "title": "adsf",
+      "description": "dafs",
+      "id": 5
+    }
+  ]
+}

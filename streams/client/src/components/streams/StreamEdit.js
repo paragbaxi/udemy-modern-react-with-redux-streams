@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStream } from '../../actions';
+import { fetchStream, editStream } from '../../actions';
+import StreamForm from './StreamForm';
 
 // Refactor to class so we can use componentDidMount() so that we can fetchStream(streamId)
 // const StreamEdit = (props) => {
@@ -9,6 +11,11 @@ class StreamEdit extends Component {
         // get stream
         this.props.fetchStream(this.props.match.params.id);
     }
+
+    onSubmit = (formValues) => {
+        // console.log(formValues);
+        this.props.editStream(this.props.match.params.id, formValues);
+    };
 
     render() {
         // console.log(this.props);
@@ -20,8 +27,25 @@ class StreamEdit extends Component {
         }
         return (
             <div>
-                {this.props.stream.title}
-                {this.props.stream.description}
+                <h3>Edit Stream</h3>
+                <StreamForm
+                    onSubmit={this.onSubmit}
+                    // Includes too much info (id, userId)
+                    // initialValues={this.props.stream}
+                    //
+                    // One way to fix
+                    // initialValues={{
+                    //     title: this.props.stream.title,
+                    //     description: this.props.stream.description,
+                    // }}
+                    //
+                    // Better way to fix
+                    initialValues={_.pick(
+                        this.props.stream,
+                        'title',
+                        'description'
+                    )}
+                />
             </div>
         );
     }
@@ -36,4 +60,6 @@ const mapStateToProps = (state, ownProps) => {
     return { stream: state.streams[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { fetchStream })(StreamEdit);
+export default connect(mapStateToProps, { fetchStream, editStream })(
+    StreamEdit
+);
